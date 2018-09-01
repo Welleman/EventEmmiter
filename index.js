@@ -7,6 +7,7 @@ let die = false;
 let game = false;
 let pause = false;
 
+//создать событие
 ee.on('gameOn', () => {
     game = true;
     pause = false;
@@ -25,6 +26,7 @@ ee.on('gameOver', () => {
     pause = false;
 });
 
+//вызов событий
 ee.emit('gameOn');
 setTimeout(_ => ee.emit('gamePause'), 5000);
 setTimeout(_ => ee.emit('gameOn'), 8000);
@@ -32,15 +34,20 @@ setTimeout(_ => ee.emit('gameOver'), 10000);
 
 setTimeout(function go() {
     
-    if (game && !pause){
-        log('game');
+    //если game == true 
+    if (game){
+        log('game on');
         setTimeout(go, 1000);
     }
-    if(pause && !die){
+    
+    //если pause == true 
+    if(pause){
         log('pause');
         setTimeout(go, 1000);
     }
+    
+    //если die == true
     if(die){
-        log('die');
+        log('game over');
     }
 }, 10);
