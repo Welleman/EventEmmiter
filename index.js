@@ -28,9 +28,9 @@ ee.on('gameOver', () => {
 
 //вызов событий
 ee.emit('gameOn');
-setTimeout(_ => ee.emit('gamePause'), 5000);
-setTimeout(_ => ee.emit('gameOn'), 8000);
-setTimeout(_ => ee.emit('gameOver'), 10000);
+setTimeout(_ => ee.emit('gamePause'), 5000);        // через 5 секунд после начала
+setTimeout(_ => ee.emit('gameOn'), 8000);           // через 8 секунд после начала 
+setTimeout(_ => ee.emit('gameOver'), 10000);        // через 10 секунд после начала
 
 setTimeout(function go() {
     
