@@ -15,39 +15,36 @@ ee.on('gameOn', () => {
 });
 
 ee.on('gamePause', () => {
+    game = false;
     pause = true;
-    game = true;
     die = false;
 });
 
 ee.on('gameOver', () => {
-    die = true;
     game = false;
     pause = false;
+    die = true;
 });
 
 //вызов событий
 ee.emit('gameOn');
 setTimeout(_ => ee.emit('gamePause'), 5000);        // через 5 секунд после начала
-setTimeout(_ => ee.emit('gameOn'), 8000);           // через 8 секунд после начала 
+setTimeout(_ => ee.emit('gameOn'), 8000);           // через 8 секунд после начала
 setTimeout(_ => ee.emit('gameOver'), 10000);        // через 10 секунд после начала
 
+let i = 1;
 setTimeout(function go() {
-    
-    //если game == true 
-    if (game){
-        log('game on');
-        setTimeout(go, 1000);
-    }
-    
-    //если pause == true 
-    if(pause){
-        log('pause');
-        setTimeout(go, 1000);
-    }
-    
+    let tick = setTimeout(go, 1000);
+    //если game == true
+    if (game) log(i + ' game on');
+
+    //если pause == true
+    if(pause) log(i + ' pause');
+
     //если die == true
     if(die){
-        log('game over');
+        clearTimeout(tick);
+        log(i + ' game over');
     }
+    i++;
 }, 10);
